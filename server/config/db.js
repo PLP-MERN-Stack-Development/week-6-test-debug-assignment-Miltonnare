@@ -10,5 +10,5 @@ mongoose.connect(uri,{
 
 }
 )
-.then(()=>console.log("MongoDB Connected"));
+.then(()=>console.log("MongoDB Connected"))
 .catch((err)=>console.error('Mongo Connection error', err));
