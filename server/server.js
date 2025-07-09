@@ -3,6 +3,7 @@ const express=require('express');
 const mongoose=require('mongoose');
 const connectDB=require('./config/db')
 require ('dotenv').config();
+const cors = require('cors');
 
 
 const bugRoutes=require('./routes/bugRoutes');
@@ -14,6 +15,7 @@ const app=express();
 connectDB();
 
 app.use(express.json());
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 
 app.use('/api/bugs', bugRoutes);
 app.use('/api/users', userRoutes);
