@@ -60,4 +60,26 @@ const getUser=async (req,res)=>{
     }
 };
 
-module.exports={registerUsers,getAllUsers,getUser};
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ message: 'All fields are required.' });
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid credentials.' });
+    }
+    // For now, compare plain text (not secure, but matches your current setup)
+    if (user.password !== password) {
+      return res.status(401).json({ message: 'Invalid credentials.' });
+    }
+    // Optionally, generate a token here
+    res.status(200).json({ message: 'Login successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error.' });
+  }
+};
+
+module.exports={registerUsers,getAllUsers,getUser,loginUser};
