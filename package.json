@@ -1,5 +1,10 @@
 {
   "dependencies": {
     "react-router-dom": "^7.6.3"
+  },
+  "devDependencies": {
+    "jest": "^30.0.4",
+    "jest-mock": "^30.0.2",
+    "supertest": "^7.1.3"
   }
 }
