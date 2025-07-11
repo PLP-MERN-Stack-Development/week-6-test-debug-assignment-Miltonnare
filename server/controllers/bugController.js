@@ -2,12 +2,13 @@ const Bug = require('../models/Bug');
 
 const createBug = async (req, res) => {
   try {
-    const { title, description, priority } = req.body;
+    const { title, description, priority, projectId } = req.body;
 
     const bug = new Bug({
       title,
       description,
-      priority
+      priority,
+      projectId
     });
 
     await bug.save();
@@ -38,4 +39,13 @@ const getBug = async (req, res) => {
   }
 };
 
-module.exports = { createBug, getAllBugs, getBug };
+const getBugsByProject = async (req, res) => {
+  try {
+    const bugs = await Bug.find({ projectId: req.params.projectId });
+    res.json(bugs);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = { createBug, getAllBugs, getBug, getBugsByProject };

@@ -15,6 +15,11 @@ const BugSchema = new mongoose.Schema({
         required: true,
          enum: ['Low', 'Medium', 'High'],
         trim: true
+    },
+    projectId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Project',
+        required: true
     }
 }, { timestamps: true });
 

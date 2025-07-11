@@ -21,6 +21,13 @@ app.use('/api/bugs', bugRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal Server Error',
+  });
+});
 
 const PORT=process.env.PORT||5000;
 
